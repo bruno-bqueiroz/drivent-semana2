@@ -45,8 +45,8 @@ async function getTicketByEnrollmentId(enrollmentId: number) {
   return ticketWithEnrollmentId;
 }
 
-async function createTicket(enrollmentId: number, ticketTypeId: number, status: TicketStatus) {
-  return  await ticketRepository.createTicket(ticketTypeId, enrollmentId, status);
+async function createTicket(enrollmentId: number, ticketTypeId: number) {
+  return  await ticketRepository.createTicket(ticketTypeId, enrollmentId);
 }
 
 const ticketsService = {

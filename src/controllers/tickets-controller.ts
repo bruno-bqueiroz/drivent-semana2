@@ -41,18 +41,19 @@ export async function getTickets(req: AuthenticatedRequest, res: Response) {
 export async function createTicket(req: AuthenticatedRequest, res: Response) {
   const { ticketTypeId } = req.body;
   const { userId } = req;
-  const status: TicketStatus = "RESERVED";
-
+  if(!ticketTypeId) res.sendStatus(httpStatus.BAD_REQUEST);
+  
   try {
     const enrollment = await enrollmentsService.getOneWithAddressByUserId(userId);
     if(!enrollment) return res.sendStatus(httpStatus.NOT_FOUND);
     const enrollmentId = enrollment.id;
-    await ticketsService.createTicket(ticketTypeId, enrollmentId, status);
+    
+    await ticketsService.createTicket(ticketTypeId, enrollmentId);
 
     const ticket = await ticketsService.getTicketWithTypeByEnrollmentId(enrollmentId);
         
     return res.status(httpStatus.CREATED).send(ticket);
   } catch (error) {
-    return res.sendStatus(httpStatus.NO_CONTENT);
+    return res.sendStatus(httpStatus.NOT_FOUND);
   }
 }

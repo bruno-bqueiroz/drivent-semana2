@@ -5,11 +5,10 @@ import { authenticateToken } from "@/middlewares";
 const ticketsRouter = Router();
 
 ticketsRouter
-  
+  .all("/*", authenticateToken)
   .get("/", getTicketsTypes)
   .get("/types", getTickets)
-  .post("/", createTicket)
-  .all("/*", authenticateToken);
+  .post("/", createTicket);
 
 export { ticketsRouter };
 
