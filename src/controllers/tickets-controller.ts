@@ -5,7 +5,6 @@ import ticketsService from "@/services/tickets-service";
 import enrollmentsService from "@/services/enrollments-service";
 
 export async function getTicketsTypes(req: AuthenticatedRequest, res: Response) {
-  console.log(req);
   const userId  = req.userId;
 
   try {
@@ -35,6 +34,8 @@ export async function getTickets(req: AuthenticatedRequest, res: Response) {
 export async function createTicket(req: AuthenticatedRequest, res: Response) {
   const { ticketTypeId } = req.body;
   const { userId } = req;
+
+  /////// return ///////// ??????????
   if(!ticketTypeId) res.sendStatus(httpStatus.BAD_REQUEST);
   
   try {
