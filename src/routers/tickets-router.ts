@@ -1,4 +1,3 @@
-
 import { Router } from "express";
 import { getTicketsTypes, getTickets, createTicket } from "@/controllers/tickets-controller";
 import { authenticateToken } from "@/middlewares";
@@ -12,3 +11,4 @@ ticketsRouter
   .post("/", createTicket);
 
 export { ticketsRouter };
+
